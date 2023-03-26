@@ -17,22 +17,15 @@ public class PaymentScheduleService : IPaymentScheduleService
         _paymentScheduleRepository = paymentScheduleRepository;
     }
 
-    public IBaseResponse<PaymentScheduleEntity> CreatePaymentScheduleEntity(LoanDetailsViewModel loanDetailsViewModel)
+    public IBaseResponse<PaymentScheduleEntity> CreatePaymentScheduleEntity(decimal bodyDebt, decimal monthlyRate, decimal monthlyPayment, int term)
     {
-        var monthlyRate = loanDetailsViewModel.Rate / 12 / 100;
-        var totalRate = (decimal)Math.Pow((double)(1 + monthlyRate), loanDetailsViewModel.Term);
-        var monthlyPayment = loanDetailsViewModel.Sum * monthlyRate * totalRate / (totalRate - 1);
-        var bodyDebt = loanDetailsViewModel.Sum;
-        var overpayment = Math.Round((monthlyPayment * loanDetailsViewModel.Term - loanDetailsViewModel.Sum), 2);
-        
         var paymentsSchedule = new List<PaymentScheduleEntity>();
-        
-        for (var i = 0; i < loanDetailsViewModel.Term; i++)
+        var dataPay = DateTime.Today;
+        for (var i = 0; i < term; i++)
         {
             var marginSum = bodyDebt * monthlyRate;  //Процентная часть
             var bodySum = monthlyPayment - marginSum;  //Основная часть
             bodyDebt -= bodySum;  // Остаток долга
-            var dataPay = DateTime.Today;
             dataPay = dataPay.AddMonths(1);  //Дата
             
             var paymentSchedule = new PaymentScheduleEntity

@@ -11,4 +11,5 @@ public class PaymentScheduleEntity : BaseEntity<long>
     public decimal BodyDebt { get; set; }
     
     public decimal TotalAmount => BodySum + MarginSum;
+    
 }

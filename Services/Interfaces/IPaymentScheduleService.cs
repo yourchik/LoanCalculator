@@ -6,5 +6,5 @@ namespace Services.Interfaces;
 
 public interface IPaymentScheduleService
 {
-    IBaseResponse<PaymentScheduleEntity> CreatePaymentScheduleEntity(LoanDetailsViewModel loanDetails);
+    IBaseResponse<PaymentScheduleEntity> CreatePaymentScheduleEntity(decimal bodyDebt, decimal monthlyRate, decimal monthlyPayment, int term);
 }

@@ -6,4 +6,5 @@ public class ClientEntity : BaseEntity<long>
     
     public string Phone { get; set; }
     
+    
 }

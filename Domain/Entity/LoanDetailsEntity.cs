@@ -12,10 +12,14 @@ public class LoanDetailsEntity : BaseEntity<long>
     
     public decimal Overpayment { get; set; }
     
-    public IEnumerable<PaymentScheduleEntity> PaymentSchedule { get; set; }
-    
-    public ClientEntity Client { get; set; }
+    public virtual IEnumerable<PaymentScheduleEntity> PaymentSchedule { get; set; }
     
     public PaymentType PaymentType { get; set; }
+    
+    public long ClientId { get; set; }
+    
+    public virtual ClientEntity Client { get; set; }
+    
+    
     
 }

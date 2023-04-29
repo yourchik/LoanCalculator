@@ -12,4 +12,7 @@ public class PaymentScheduleEntity : BaseEntity<long>
     
     public decimal TotalAmount => BodySum + MarginSum;
     
+    public long LoanDetailsId { get; set; }
+    
+    public virtual LoanDetailsEntity LoanDetails{ get; set; }
 }

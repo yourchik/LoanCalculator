@@ -35,9 +35,10 @@ public class ClientService : IClientService
             FullName = loanDetailsViewModel.FullName,
             Phone = loanDetailsViewModel.Phone,
         };
-        
+
         _clientRepository.Create(client);
-        
+        _clientRepository.Save();
+
         return new BaseResponse<ClientEntity>()
         {
             Description = "Клиент создан",

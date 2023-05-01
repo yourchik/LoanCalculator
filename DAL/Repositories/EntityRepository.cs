@@ -17,10 +17,9 @@ public class EntityRepository<T> : IBaseRepository<T> where T : BaseEntity<long>
         try
         {
             _db.Set<T>().Add(entity);
-            _db.SaveChanges();
             return true;
         }
-        catch (Exception e)
+        catch
         {
             return false;
         }
@@ -32,10 +31,9 @@ public class EntityRepository<T> : IBaseRepository<T> where T : BaseEntity<long>
         try
         {
             _db.Set<T>().AddRange(entity);
-            _db.SaveChanges();
             return true;
         }
-        catch (Exception e)
+        catch
         {
             return false;
         }
@@ -51,10 +49,9 @@ public class EntityRepository<T> : IBaseRepository<T> where T : BaseEntity<long>
         try
         {
             _db.Set<T>().Remove(entity);
-            _db.SaveChanges();
             return true;
         }
-        catch (Exception e)
+        catch
         {
             return false;
         }
@@ -65,14 +62,24 @@ public class EntityRepository<T> : IBaseRepository<T> where T : BaseEntity<long>
         try
         {
             _db.Set<T>().Update(entity);
-            _db.SaveChanges();
             return true;
         }
-        catch (Exception e)
+        catch
         {
             return false;
         }
-        
     }
     
+    public bool Save()
+    {
+        try
+        {
+            _db.SaveChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

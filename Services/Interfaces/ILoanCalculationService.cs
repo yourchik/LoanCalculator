@@ -6,7 +6,7 @@ namespace Services.Interfaces;
 
 public interface ILoanCalculationService
 {
-    IBaseResponse<LoanDetailsEntity> CreateLoanDetails(LoanDetailsViewModel loanDetails);
+    IBaseResponse<LoanDetailsEntity> CreateLoan(LoanDetailsViewModel loanDetails);
     
 }
 

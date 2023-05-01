@@ -12,8 +12,4 @@
       <ProjectReference Include="..\LoanCalculator\LoanCalculator.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ModelDto\" />
-    </ItemGroup>
-
 </Project>

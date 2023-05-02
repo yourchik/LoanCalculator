@@ -14,7 +14,7 @@ public class LoanDetailsEntity : BaseEntity<long>
 
     public PaymentType PaymentType { get; set; }
     
-    public long ClientId { get; set; }
+    public ClientEntity ClientId { get; set; }
     
     public virtual IEnumerable<PaymentScheduleEntity> PaymentSchedule { get; set; }
     

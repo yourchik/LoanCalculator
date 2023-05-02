@@ -6,8 +6,8 @@ namespace DAL.Repositories;
 
 public class EntityRepository<T> : IBaseRepository<T> where T : BaseEntity<long>
 {
-    private readonly AppDbContext _db; 
-    public EntityRepository(AppDbContext db)
+    private readonly ApplicationDbContext _db; 
+    public EntityRepository(ApplicationDbContext db)
     {
         _db = db;
     }

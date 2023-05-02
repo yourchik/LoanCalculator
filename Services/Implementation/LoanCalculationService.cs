@@ -28,25 +28,8 @@ public class LoanCalculationService : ILoanCalculationService
         var bodyDebt = loanDetailsViewModel.Sum;
         var overpayment = Math.Round((monthlyPayment * loanDetailsViewModel.Term - loanDetailsViewModel.Sum), 2);
 
-        var paymentsSchedule = new List<PaymentScheduleEntity>();
-        var dataPay = DateTime.Today;
-        for (var i = 0; i < loanDetailsViewModel.Term; i++)
-        {
-            var marginSum = bodyDebt * monthlyRate;  //Процентная часть
-            var bodySum = monthlyPayment - marginSum;  //Основная часть
-            bodyDebt -= bodySum;  // Остаток долга
-            dataPay = dataPay.AddMonths(1);  //Дата
-            
-            var paymentSchedule = new PaymentScheduleEntity
-            {
-                Date = dataPay,
-                MarginSum = Math.Round(marginSum, 2),
-                BodySum = Math.Round(bodySum, 2),
-                BodyDebt = Math.Round(bodyDebt, 2),
-            };
-            paymentsSchedule.Add(paymentSchedule);
-        }
-        
+        var paymentsSchedule = PaymentScheduleEntities(loanDetailsViewModel, bodyDebt, monthlyRate, monthlyPayment);
+
         var loanDetailsEntity = new LoanDetailsEntity
         {
             Sum = loanDetailsViewModel.Sum,
@@ -66,5 +49,29 @@ public class LoanCalculationService : ILoanCalculationService
             StatusCode = StatusCode.OK,
         };
     }
-    
+
+    private List<PaymentScheduleEntity> PaymentScheduleEntities(LoanDetailsViewModel loanDetailsViewModel, decimal bodyDebt, decimal monthlyRate,
+        decimal monthlyPayment)
+    {
+        var paymentsSchedule = new List<PaymentScheduleEntity>();
+        var dataPay = DateTime.Today;
+        for (var i = 0; i < loanDetailsViewModel.Term; i++)
+        {
+            var marginSum = bodyDebt * monthlyRate; //Процентная часть
+            var bodySum = monthlyPayment - marginSum; //Основная часть
+            bodyDebt -= bodySum; // Остаток долга
+            dataPay = dataPay.AddMonths(1); //Дата
+
+            var paymentSchedule = new PaymentScheduleEntity
+            {
+                Date = dataPay,
+                MarginSum = Math.Round(marginSum, 2),
+                BodySum = Math.Round(bodySum, 2),
+                BodyDebt = Math.Round(bodyDebt, 2),
+            };
+            paymentsSchedule.Add(paymentSchedule);
+        }
+
+        return paymentsSchedule;
+    }
 }

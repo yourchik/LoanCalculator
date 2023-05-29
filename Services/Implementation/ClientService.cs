@@ -45,4 +45,9 @@ public class ClientService : IClientService
             StatusCode = StatusCode.OK,
         };
     }
+    
+    public ClientEntity FindClient(string phone)
+    {
+        return _clientRepository.GetAll().FirstOrDefault(x => x.Phone == phone) ?? throw new InvalidOperationException();
+    }
 }

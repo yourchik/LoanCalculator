@@ -14,10 +14,12 @@ public class LoanDetailsEntity : BaseEntity<long>
 
     public PaymentType PaymentType { get; set; }
     
-    public ClientEntity ClientId { get; set; }
+    public long ClientEntityId { get; set; }
     
-    public virtual IEnumerable<PaymentScheduleEntity> PaymentSchedule { get; set; }
+    public long PaymentSchedulesEntityId { get; set; }
     
-    public virtual ClientEntity Client { get; set; }
+    public virtual IEnumerable<PaymentScheduleEntity> PaymentSchedulesEntity { get; set; }
+    
+    public virtual ClientEntity ClientEntity { get; set; }
     
 }

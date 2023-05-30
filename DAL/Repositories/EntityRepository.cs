@@ -39,11 +39,6 @@ public class EntityRepository<T> : IBaseRepository<T> where T : BaseEntity<long>
         }
     }
 
-    public IQueryable<T> GetAll()
-    {
-        return _db.Set<T>();
-    }
-
     public bool Delete(T entity)
     {
         try
@@ -81,5 +76,10 @@ public class EntityRepository<T> : IBaseRepository<T> where T : BaseEntity<long>
         {
             return false;
         }
+    }
+    
+    public IQueryable<T> GetAll()
+    {
+        return _db.Set<T>();
     }
 }

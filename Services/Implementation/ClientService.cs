@@ -48,6 +48,6 @@ public class ClientService : IClientService
     
     public ClientEntity FindClient(string phone)
     {
-        return _clientRepository.GetAll().FirstOrDefault(x => x.Phone == phone) ?? throw new InvalidOperationException();
+        return _clientRepository.GetAll().ToList().FirstOrDefault(x => x.Phone == phone) ?? throw new InvalidOperationException();
     }
 }

@@ -8,10 +8,10 @@ public interface IBaseRepository<T> where T : BaseEntity<long>
 
     bool CreateRange(IEnumerable<T> entity);
 
-    IQueryable<T> GetAll();
-
     bool Delete(T entity);
 
     bool Update(T entity);
     public bool Save();
+    
+    IQueryable<T> GetAll();
 }

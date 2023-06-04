@@ -15,6 +15,10 @@ public class LoanCalculateController : Controller
     [HttpPost]
     public IActionResult LoanCalculate(LoanDetailsViewModel loanDetails)
     {
+        if (!ModelState.IsValid)
+            return View(loanDetails);
+        
+        
         return View();
     }
 }

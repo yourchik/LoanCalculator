@@ -21,7 +21,7 @@
         @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-2" })
         <div class="col-sm-3">
         @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Phone)
+        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
         </div>
     </div>
     
@@ -29,7 +29,7 @@
         @Html.LabelFor(model => model.Sum, new { @class = "control-label col-md-2" })
         <div class="col-sm-3">
         @Html.TextBoxFor(model => model.Sum, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Sum)
+        @Html.ValidationMessageFor(model => model.Sum, "", new { @class = "text-danger" })
         </div>
     </div>
     
@@ -37,7 +37,7 @@
         @Html.LabelFor(model => model.Term, new { @class = "control-label col-md-2" })
         <div class="col-sm-3">
         @Html.TextBoxFor(model => model.Term, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Term)
+        @Html.ValidationMessageFor(model => model.Term, "", new { @class = "text-danger" })
         </div>
     </div>
     
@@ -45,7 +45,7 @@
         @Html.LabelFor(model => model.Rate, new { @class = "control-label col-md-2" })
         <div class="col-sm-3">
         @Html.TextBoxFor(model => model.Rate, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Rate)
+        @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
         </div>
     </div>
     
@@ -53,7 +53,7 @@
         @Html.LabelFor(model => model.PaymentType, new { @class = "control-label col-md-2" })
         <div class="col-sm-3">
             @Html.DropDownListFor(model => model.PaymentType, new SelectList(Enum.GetValues(typeof(PaymentType))), "Вид платежей", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.PaymentType)
+            @Html.ValidationMessageFor(model => model.PaymentType, "", new { @class = "text-danger" })
         </div>
     </div>
     

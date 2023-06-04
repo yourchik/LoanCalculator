@@ -28,9 +28,7 @@ public class LoanDetailsService : ILoanDetailsService
 
         var loanDetailsEntity = new LoanDetailsEntity
         {
-            Sum = loanDetailsViewModel.Sum,,
-            
-            
+            Sum = loanDetailsViewModel.Sum,
             Term = loanDetailsViewModel.Term,
             Rate = loanDetailsViewModel.Rate,
             PaymentType = loanDetailsViewModel.PaymentType,

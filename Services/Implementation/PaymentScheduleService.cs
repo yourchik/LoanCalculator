@@ -4,6 +4,7 @@ using Domain.Enum;
 using Domain.Implementation.Response;
 using Domain.Interfaces.IResponse;
 using LoanCalculator.ViewModels;
+using Services.DtoModel;
 using Services.Interfaces;
 
 namespace Services.Implementation;
@@ -17,16 +18,15 @@ public class PaymentScheduleService : IPaymentScheduleService
         _paymentScheduleRepository = paymentScheduleRepository;
     }
 
-    public IBaseResponse<PaymentScheduleEntity> CreateLoan(LoanDetailsEntity loanDetails, decimal bodyDebt, decimal monthlyRate,
-        decimal monthlyPayment)
+    public IBaseResponse<PaymentScheduleEntity> CreateLoan(LoanDetailsEntity loanDetails, DtoLoanCalculation loanCalculation)
     {
         var paymentsSchedule = new List<PaymentScheduleEntity>();
         var dataPay = DateTime.Today;
         for (var i = 0; i < loanDetails.Term; i++)
         {
-            var marginSum = bodyDebt * monthlyRate; //Процентная часть
-            var bodySum = monthlyPayment - marginSum; //Основная часть
-            bodyDebt -= bodySum; // Остаток долга
+            var marginSum = loanCalculation.BodyDebt * loanCalculation.MonthlyRate; //Процентная часть
+            var bodySum = loanCalculation.MonthlyRate - marginSum; //Основная часть
+            loanCalculation.BodyDebt -= bodySum; // Остаток долга
             dataPay = dataPay.AddMonths(1); //Дата
 
             var paymentSchedule = new PaymentScheduleEntity
@@ -34,7 +34,7 @@ public class PaymentScheduleService : IPaymentScheduleService
                 Date = dataPay,
                 MarginSum = Math.Round(marginSum, 2),
                 BodySum = Math.Round(bodySum, 2),
-                BodyDebt = Math.Round(bodyDebt, 2),
+                BodyDebt = Math.Round(loanCalculation.BodyDebt, 2),
                 LoanDetailsEntityId = loanDetails.Id,
                 LoanDetailsEntity = loanDetails
             };

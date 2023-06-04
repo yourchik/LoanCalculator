@@ -4,6 +4,7 @@ using Domain.Enum;
 using Domain.Implementation.Response;
 using Domain.Interfaces.IResponse;
 using LoanCalculator.ViewModels;
+using Services.DtoModel;
 using Services.Interfaces;
 
 namespace Services.Implementation;
@@ -11,28 +12,21 @@ namespace Services.Implementation;
 public class LoanDetailsService : ILoanDetailsService
 {
     private readonly IBaseRepository<LoanDetailsEntity> _loanDetailsRepository;
-    
-    public LoanDetailsService (IBaseRepository<LoanDetailsEntity> loanDetailsRepository, 
-         IBaseRepository<PaymentScheduleEntity> paymentScheduleRepository)
+
+    public LoanDetailsService (IBaseRepository<LoanDetailsEntity> loanDetailsRepository, IDtoCalculation dtoCalculation)
     {
         _loanDetailsRepository = loanDetailsRepository;
     }
 
-    public IBaseResponse<LoanDetailsEntity> CreateLoan(LoanDetailsViewModel loanDetailsViewModel, ClientEntity client)
+    public IBaseResponse<LoanDetailsEntity> CreateLoan(LoanDetailsViewModel loanDetailsViewModel, DtoLoanCalculation loanCalculation, ClientEntity client)
     {
-        var monthlyRate = loanDetailsViewModel.Rate / 12 / 100;
-        var totalRate = (decimal)Math.Pow((double)(1 + monthlyRate), loanDetailsViewModel.Term);
-        var monthlyPayment = loanDetailsViewModel.Sum * monthlyRate * totalRate / (totalRate - 1);
-        var bodyDebt = loanDetailsViewModel.Sum;
-        var overpayment = Math.Round((monthlyPayment * loanDetailsViewModel.Term - loanDetailsViewModel.Sum), 2);
-
         var loanDetailsEntity = new LoanDetailsEntity
         {
             Sum = loanDetailsViewModel.Sum,
             Term = loanDetailsViewModel.Term,
             Rate = loanDetailsViewModel.Rate,
             PaymentType = loanDetailsViewModel.PaymentType,
-            Overpayment = overpayment,
+            Overpayment = loanCalculation.Overpayment,
             ClientEntity = client,
             ClientEntityId = client.Id
         };
@@ -49,6 +43,6 @@ public class LoanDetailsService : ILoanDetailsService
 
     public LoanDetailsEntity FindLoanDetailsEntity(ClientEntity client)
     {
-        return _loanDetailsRepository.GetAll().FirstOrDefault(x => x.ClientEntityId == client.Id) ?? throw new InvalidOperationException();
+        return _loanDetailsRepository.GetAll().ToList().Find(x => x.ClientEntityId == client.Id) ?? throw new InvalidOperationException();
     }
 }

@@ -3,7 +3,6 @@ using Domain.Entity;
 using Domain.Enum;
 using Domain.Implementation.Response;
 using Domain.Interfaces.IResponse;
-using LoanCalculator.ViewModels;
 using Services.DtoModel;
 using Services.Interfaces;
 
@@ -18,7 +17,7 @@ public class LoanDetailsService : ILoanDetailsService
         _loanDetailsRepository = loanDetailsRepository;
     }
 
-    public IBaseResponse<LoanDetailsEntity> CreateLoan(LoanDetailsViewModel loanDetailsViewModel, DtoLoanCalculation loanCalculation, ClientEntity client)
+    public IBaseResponse<LoanDetailsEntity> CreateLoan(DtoLoanDetails loanDetailsViewModel, DtoLoanCalculation loanCalculation, ClientEntity client)
     {
         var loanDetailsEntity = new LoanDetailsEntity
         {

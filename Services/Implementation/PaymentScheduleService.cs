@@ -3,7 +3,6 @@ using Domain.Entity;
 using Domain.Enum;
 using Domain.Implementation.Response;
 using Domain.Interfaces.IResponse;
-using LoanCalculator.ViewModels;
 using Services.DtoModel;
 using Services.Interfaces;
 

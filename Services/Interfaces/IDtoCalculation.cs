@@ -1,9 +1,8 @@
-﻿using LoanCalculator.ViewModels;
-using Services.DtoModel;
+﻿using Services.DtoModel;
 
 namespace Services.Interfaces;
 
 public interface IDtoCalculation
 {
-    DtoLoanCalculation DtoLoanCalculation(LoanDetailsViewModel loanDetailsViewModel);
+    DtoLoanCalculation DtoLoanCalculation(DtoLoanDetails loanDetailsViewModel);
 }

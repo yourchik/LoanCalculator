@@ -3,7 +3,7 @@ using Domain.Entity;
 using Domain.Enum;
 using Domain.Implementation.Response;
 using Domain.Interfaces.IResponse;
-using LoanCalculator.ViewModels;
+using Services.DtoModel;
 using Services.Interfaces;
 
 namespace Services.Implementation;
@@ -17,7 +17,7 @@ public class ClientService : IClientService
         _clientRepository = clientRepository;
     }
 
-    public IBaseResponse<ClientEntity> CreateClient(LoanDetailsViewModel loanDetailsViewModel)
+    public IBaseResponse<ClientEntity> CreateClient(DtoLoanDetails loanDetailsViewModel)
     {
         var client = _clientRepository.GetAll().FirstOrDefault(x => x.Phone == loanDetailsViewModel.Phone);
 

@@ -1,12 +1,11 @@
-﻿using LoanCalculator.ViewModels;
-using Services.DtoModel;
+﻿using Services.DtoModel;
 using Services.Interfaces;
 
 namespace Services.Implementation;
 
 public class DtoCalculation : IDtoCalculation
 {
-    public DtoLoanCalculation DtoLoanCalculation(LoanDetailsViewModel loanDetailsViewModel)
+    public DtoLoanCalculation DtoLoanCalculation(DtoLoanDetails loanDetailsViewModel)
     {
         var loanCalculation = new DtoLoanCalculation();
         
